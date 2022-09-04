@@ -11,6 +11,7 @@ export default function Game() {
     let { gameID } = useParams();
     let inputRef = useRef(null);
     const [word, setWord] = useState("");
+    const [counter, setCounter] = useState(1);
     const [num_letters, setNum_letters] = useState("");
     const [success_msg, setSuccess_msg] = useState("");
     const [server_response, set_server_response] = useState("");
@@ -29,13 +30,15 @@ export default function Game() {
 
     let check_if_success = function(){
         if (server_response && server_response.length === parseInt(num_letters) && server_response.split("*").join("") === "") {
-            setSuccess_msg("שכוייח!!")
+            setSuccess_msg("כל הכבוד!!\n הצלחתם לגלות את המילה תוך " + counter.toString() + " נסיונות!")
         }
     }
 
-    let updateView = function(){
+    let updateResults = function(){
         if(server_response.length === parseInt(num_letters) && word.length === parseInt(num_letters)){
             setAllResultsView( AllResultsView.concat([<WordGrid result={server_response} word={word}/>]))
+            setCounter(counter + 1)
+            check_if_success()
             setWord("")
             set_server_response("")
             inputRef.clear()
@@ -43,8 +46,7 @@ export default function Game() {
     }
 
     useEffect(get_num_letters,[gameID]);
-    useEffect(updateView,[server_response]);
-    useEffect(check_if_success,[num_letters, server_response]);
+    useEffect(updateResults,[server_response]);
 
 
     function changeWord(value,index) {
@@ -83,10 +85,8 @@ export default function Game() {
                     autoSelect={true}
                     regexCriteria={/^[א-ת]*$/} />
             }
-            {/*<input onChange={changeWord} onKeyDown={sendIfEnter} value={word} type="text" />*/}
             <Button size="large" sx={{padding: 1, margin: 2, backgroundColor:'green'}} variant="contained" onKeyDown={sendIfEnter} onClick={sendWord} >בחר</Button>
 
-            {/*<button onClick={sendWord} >שלח</button>*/}
             {AllResultsView}
             <h2>{success_msg}</h2>
 

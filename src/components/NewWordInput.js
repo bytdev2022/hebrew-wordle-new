@@ -22,8 +22,13 @@ export default function NewWordInput() {
     const [server_response, set_server_response] = useState("");
     const [valid_word, setValidWord] = useState("");
     const [gameID, setGameID] = useState("");
-
-
+    const [alert, setAlert] = useState(false);
+    const [back_to_star_button, setBackButton] = useState(false);
+    const [open, setOpen] = React.useState(false);
+    let gameLink = `game/${gameID}`;
+    let newWordComponent = "/";
+    let current_url = window.location.href;
+    let game_url = current_url.replace("/choosePlay/", "/game/")
 
     let navigate = useNavigate();
 
@@ -45,13 +50,7 @@ export default function NewWordInput() {
             });
         handleClickOpen();
     }
-    let gameLink = `game/${gameID}`;
-    let newWordComponent = "/";
-    let current_url = window.location.href;
-    let game_url = current_url.replace("/choosePlay/", "/game/")
-    const [alert, setAlert] = useState(false);
-    const [back_to_star_button, setBackButton] = useState(false);
-    const [open, setOpen] = React.useState(false);
+
 
     let copy_game_link = function(){
         navigator.clipboard.writeText(game_url + gameLink)
@@ -64,7 +63,6 @@ export default function NewWordInput() {
             });
     }
     let navigateToStart = function(){
-        // navigate(newWordComponent)
         handleClose()
         setWord("");
     }

@@ -1,7 +1,7 @@
-
+import config from '../configuration.json';
 
 export default function SendNewWord(guessedWord) {
-    let url = "https://hebrew-wordle-server.herokuapp.com";
+    let url = config.serverUrl;
 
     return fetch(`${url}/new-game?word=${guessedWord}`)
         .then((response) => {
