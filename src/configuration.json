@@ -1,4 +1,4 @@
 {
   "serverUrl": "https://hebrew-wordle-server.herokuapp.com",
-  "for developing-serverUrl": "http://localhost:8989"
+  "dev-serverUrl": "http://localhost:8989"
 }

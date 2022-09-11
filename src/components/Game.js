@@ -5,6 +5,12 @@ import StartTheGame from '../servises/GetNewGameProp';
 import WordGrid from './ResultsView'
 import PinInput from 'react-pin-input';
 import Button from "@mui/material/Button";
+import CircularProgress from '@mui/material/CircularProgress';
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Dialog from "@mui/material/Dialog";
 
 
 export default function Game() {
@@ -17,7 +23,6 @@ export default function Game() {
     const [server_response, set_server_response] = useState("");
     const [pins, setPins] = useState(false);
     const [AllResultsView, setAllResultsView] = useState([]);
-
 
 
     let get_num_letters = function(){
@@ -69,12 +74,12 @@ export default function Game() {
         <div>
             <h2> נחשו מה המילה:  </h2>
             {
-                pins &&
+                pins ?
                 < PinInput
                     length={parseInt(num_letters)}
                     initialValue=""
                     onChange={changeWord}
-                    onKeyDown={sendIfEnter}
+                    // onKeyDown={sendIfEnter}
                     type="string"
                     inputMode="string"
                     style={{padding: '10px'}}
@@ -83,13 +88,11 @@ export default function Game() {
                     ref={(n) => inputRef=n}
                     // onComplete={(value, index) => {}}
                     autoSelect={true}
-                    regexCriteria={/^[א-ת]*$/} />
+                    regexCriteria={/^[א-ת]*$/} /> : <CircularProgress color="secondary"/>
             }
             <Button size="large" sx={{padding: 1, margin: 2, backgroundColor:'green'}} variant="contained" onKeyDown={sendIfEnter} onClick={sendWord} >בחר</Button>
-
             {AllResultsView}
             <h2>{success_msg}</h2>
-
         </div>
     );
 }

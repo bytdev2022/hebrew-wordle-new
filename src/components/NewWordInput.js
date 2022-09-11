@@ -22,13 +22,14 @@ export default function NewWordInput() {
     const [server_response, set_server_response] = useState("");
     const [valid_word, setValidWord] = useState("");
     const [gameID, setGameID] = useState("");
-    const [alert, setAlert] = useState(false);
+    const [alert_copy, setAlertCopy] = useState(false);
     const [back_to_star_button, setBackButton] = useState(false);
     const [open, setOpen] = React.useState(false);
     let gameLink = `game/${gameID}`;
     let newWordComponent = "/";
     let current_url = window.location.href;
     let game_url = current_url.replace("/choosePlay/", "/game/")
+    const err_msg = "מצטערים!\n יש תקלה בחיבור לשרת. אנא פנה לתמיכה טכנית.";
 
     let navigate = useNavigate();
 
@@ -55,10 +56,10 @@ export default function NewWordInput() {
     let copy_game_link = function(){
         navigator.clipboard.writeText(game_url + gameLink)
             .then(() => {
-                setAlert(true);
+                setAlertCopy(true);
                 setBackButton(true)
                 setTimeout(()=>{
-                    setAlert(false);
+                    setAlertCopy(false);
                 },4000)
             });
     }
@@ -76,12 +77,11 @@ export default function NewWordInput() {
     return (
         <div >
             {
-                alert &&
+                alert_copy &&
                 <Alert align="center" severity='success'>הקישור הועתק!</Alert>
             }
             <span className="header_font" >ברוכים הבאים למשחק וורדל</span>
             <br/>
-            {/*<h3>נא הכניסו את המילה שברצונכם לבחור</h3>*/}
             <TextField id="word_input" label="נא הכנס את המילה שלך..." value={word} color={valid_word} onChange={changeWord} onKeyDown={sendIfEnter} variant="outlined" />
             {/*<input onChange={changeWord} onKeyDown={sendIfEnter} type="text" />*/}
             <div>

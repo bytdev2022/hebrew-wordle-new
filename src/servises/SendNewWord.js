@@ -9,5 +9,8 @@ export default function SendNewWord(guessedWord) {
         })
         .then((jsonObject) => {
             return jsonObject["gameId"];
+        })
+        .catch(error => {
+            alert("מצטערים!\n יש תקלה בחיבור לשרת. אנא פנה לתמיכה טכנית.")
         });
 }
