@@ -5,6 +5,7 @@ import StartTheGame from '../servises/GetNewGameProp';
 import WordGrid from './ResultsView'
 import PinInput from 'react-pin-input';
 import Button from "@mui/material/Button";
+import "../css/Buttons.css";
 
 
 export default function Game() {
@@ -12,7 +13,7 @@ export default function Game() {
     let inputRef = useRef(null);
     const [word, setWord] = useState("");
     const [num_letters, setNum_letters] = useState("");
-    const [success_msg, setSuccess_msg] = useState("");
+    const [success, setSuccess] = useState(false);
     const [server_response, set_server_response] = useState("");
     const [pins, setPins] = useState(false);
     const [AllResultsView, setAllResultsView] = useState([]);
@@ -29,7 +30,7 @@ export default function Game() {
 
     let check_if_success = function(){
         if (server_response && server_response.length === parseInt(num_letters) && server_response.split("*").join("") === "") {
-            setSuccess_msg("שכוייח!!")
+            setSuccess(true);
         }
     }
 
@@ -65,7 +66,7 @@ export default function Game() {
     }
     return (
         <div>
-            <h2> נחשו מה המילה:  </h2>
+            <h2 style={{margin: "10px"}}> נחשו מהי המילה: </h2>
             {
                 pins &&
                 < PinInput
@@ -75,20 +76,31 @@ export default function Game() {
                     onKeyDown={sendIfEnter}
                     type="string"
                     inputMode="string"
-                    style={{padding: '10px'}}
-                    inputStyle={{borderColor: 'green'}}
-                    inputFocusStyle={{borderColor: 'yellow'}}
+                    style={{margin: "5px"}}
+                    inputStyle={{borderColor: '#037748'}}
+                    focus={true}
+                    inputFocusStyle={{borderColor: '#fff76f'}}
                     ref={(n) => inputRef=n}
                     // onComplete={(value, index) => {}}
                     autoSelect={true}
                     regexCriteria={/^[א-ת]*$/} />
             }
             {/*<input onChange={changeWord} onKeyDown={sendIfEnter} value={word} type="text" />*/}
-            <Button size="large" sx={{padding: 1, margin: 2, backgroundColor:'green'}} variant="contained" onKeyDown={sendIfEnter} onClick={sendWord} >בחר</Button>
+            <button className={"button guess-button"} disabled={word.length < num_letters}
+                    onKeyDown={sendIfEnter} onClick={sendWord}>שלח
+            </button>
+            <div style={{margin: "5px"}}>
+                {AllResultsView}
+            </div>
 
-            {/*<button onClick={sendWord} >שלח</button>*/}
-            {AllResultsView}
-            <h2>{success_msg}</h2>
+            {
+                AllResultsView.length < 6 ?
+                    success &&
+                            <h2>כל הכבוד!</h2>
+                    :
+                    success ?
+                        <h2>יותר מזל משכל...</h2> : <h2>חבל, נגמרו לך הניחושים.</h2>
+            }
 
         </div>
     );
