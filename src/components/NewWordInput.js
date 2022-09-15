@@ -8,7 +8,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
-import { Spinner } from '@chakra-ui/react';
 // import choosePlay from './CopyUrlOrStartGame'
 import Slide from '@mui/material/Slide';
 import Alert from '@mui/material/Alert';

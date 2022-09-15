@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import Card from '@mui/material/Card';
 import Grid from '@mui/material/Unstable_Grid2';
-import PinInput from "react-pin-input";
-
 
 const InPlace = styled(Grid)(({ theme }) => ({
     backgroundColor: 'Chartreuse',
@@ -13,11 +9,6 @@ const InPlace = styled(Grid)(({ theme }) => ({
     height: "50px",
 
 }));
-const place = (a) => {
-    return (
-        <PinInput length={1} placeholder={a} style={{width: "20px"}}> </PinInput>
-    )
-}
 
 const NotInWord = styled(Grid)(({ theme }) => ({
     backgroundColor: '#727372',
