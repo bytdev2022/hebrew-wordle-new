@@ -16,15 +16,19 @@ export default function Game() {
     const [server_response, set_server_response] = useState("");
     const [pins, setPins] = useState(false);
     const [AllResultsView, setAllResultsView] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
 
 
     let get_num_letters = function(){
+        console.log(isLoading);
         StartTheGame(gameID)
             .then(results => {
                 setNum_letters(results.numOfLetters);
-                setPins(true)}
-            );
+                setPins(true)
+                console.log(results.numOfLetters)
+                setIsLoading(false)
+            });
     }
 
     let check_if_success = function(){
@@ -42,7 +46,7 @@ export default function Game() {
         }
     }
 
-    useEffect(get_num_letters,[gameID]);
+    useEffect(get_num_letters,[]);
     useEffect(updateView,[server_response]);
     useEffect(check_if_success,[num_letters, server_response]);
 
@@ -65,29 +69,36 @@ export default function Game() {
     }
     return (
         <div>
-            <h2 style={{margin: "10px"}}> נחשו מהי המילה: </h2>
             {
-                pins &&
-                < PinInput
-                    length={parseInt(num_letters)}
-                    initialValue=""
-                    onChange={changeWord}
-                    onKeyDown={sendIfEnter}
-                    type="string"
-                    inputMode="string"
-                    style={{margin: "5px"}}
-                    inputStyle={{borderColor: '#037748'}}
-                    focus={true}
-                    inputFocusStyle={{borderColor: '#bda443'}}
-                    ref={(n) => inputRef=n}
-                    // onComplete={(value, index) => {}}
-                    autoSelect={true}
-                    regexCriteria={/^[א-ת]*$/} />
+                isLoading ?
+                    <div>
+                        <h3>המתן לטעינת המשחק</h3>
+                        <h4>(השרת חינמי...)</h4>
+                        <div className="loader">Loading...</div>
+                    </div>
+                    :
+                    <div>
+                        <h2 style={{margin: "10px"}}> נחשו מהי המילה: </h2>
+                        < PinInput
+                            length={parseInt(num_letters)}
+                            initialValue=""
+                            onChange={changeWord}
+                            onKeyDown={sendIfEnter}
+                            type="string"
+                            inputMode="string"
+                            style={{margin: "5px"}}
+                            inputStyle={{borderColor: '#037748'}}
+                            focus={true}
+                            inputFocusStyle={{borderColor: '#bda443'}}
+                            ref={(n) => inputRef = n}
+                            // onComplete={(value, index) => {}}
+                            autoSelect={true}
+                            regexCriteria={/^[א-ת]*$/}/>
+                        <button className={"button guess-button"} disabled={word.length < num_letters}
+                                onKeyDown={sendIfEnter} onClick={sendWord}>שלח
+                        </button>
+                    </div>
             }
-            {/*<input onChange={changeWord} onKeyDown={sendIfEnter} value={word} type="text" />*/}
-            <button className={"button guess-button"} disabled={word.length < num_letters}
-                    onKeyDown={sendIfEnter} onClick={sendWord}>שלח
-            </button>
             <div style={{margin: "5px"}}>
                 {AllResultsView}
             </div>
