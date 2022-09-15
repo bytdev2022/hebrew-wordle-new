@@ -8,6 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
+import { Spinner } from '@chakra-ui/react';
 // import choosePlay from './CopyUrlOrStartGame'
 import Slide from '@mui/material/Slide';
 import Alert from '@mui/material/Alert';
@@ -22,8 +23,7 @@ export default function NewWordInput() {
     const [server_response, set_server_response] = useState("");
     const [valid_word, setValidWord] = useState("");
     const [gameID, setGameID] = useState("");
-
-
+    const [isLoading, setIsLoading] = useState(false);
 
     let navigate = useNavigate();
 
@@ -39,11 +39,13 @@ export default function NewWordInput() {
 
     function sendWord() {
         setWord_to_send(word)
+        setIsLoading(true);
         sendNewWord(word)
             .then(game_id => {
                 setGameID(game_id);
+                handleClickOpen();
+                setIsLoading(false);
             });
-        handleClickOpen();
     }
     let gameLink = `game/${gameID}`;
     let newWordComponent = "/";
@@ -83,13 +85,20 @@ export default function NewWordInput() {
             }
             <span className="header_font" >ברוכים הבאים למשחק וורדל</span>
             <br/>
-            {/*<h3>נא הכניסו את המילה שברצונכם לבחור</h3>*/}
-            <TextField id="word_input" label="נא הכנס את המילה שלך..." value={word} color={valid_word} onChange={changeWord} onKeyDown={sendIfEnter} variant="outlined" />
-            {/*<input onChange={changeWord} onKeyDown={sendIfEnter} type="text" />*/}
-            <div>
-                <Button size="large" sx={{padding: 1, margin: 2 }} variant="contained" onClick={sendWord} >בחר</Button>
-            </div>
-            {/*<h2>{word_to_send}</h2>*/}
+            {
+                isLoading?
+                    <div className="loader">Loading...</div>
+                    :
+                    <div>
+                        <TextField style={{direction: "rtl"}} id="word_input" label={"נא הכנס את המילה שלך..."}
+                                   value={word} color={valid_word} onChange={changeWord} multiline onKeyDown={sendIfEnter}
+                        />
+                        <br/>
+                        <Button size="large" sx={{padding: 1, margin: 2 }} variant="contained" onClick={sendWord} >בחר</Button>
+                    </div>
+
+            }
+
             <h3>{server_response}</h3>
             <Dialog
                 open={open}

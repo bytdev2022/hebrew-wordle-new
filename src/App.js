@@ -7,15 +7,16 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import React from "react";
+import React, {useState} from "react";
 import {Helmet} from 'react-helmet';
 
-
 function App() {
+
   return (
       <div className="App" style={{ direction: "rtl", margin: "10px"}}>
+
         <Helmet>
-          <style>{'body { background-color: #4C99F1; }'}</style>
+          <style>{'body { background-color: #6dff95; }'}</style>
         </Helmet>
         <Router>
           <Routes>

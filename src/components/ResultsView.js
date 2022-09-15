@@ -1,29 +1,35 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import Card from '@mui/material/Card';
 import Grid from '@mui/material/Unstable_Grid2';
+import PinInput from "react-pin-input";
 
 
-const InPlace = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#70F161',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+const InPlace = styled(Grid)(({ theme }) => ({
+    backgroundColor: 'Chartreuse',
+    padding: theme.spacing(2),
+    width: "50px",
+    height: "50px",
+
 }));
-const NotInWord = styled(Paper)(({ theme }) => ({
+const place = (a) => {
+    return (
+        <PinInput length={1} placeholder={a} style={{width: "20px"}}> </PinInput>
+    )
+}
+
+const NotInWord = styled(Grid)(({ theme }) => ({
     backgroundColor: '#727372',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+    padding: theme.spacing(2),
+    width: "50px",
+    height: "50px",
 }));
-const InWord = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#F1EC4C',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+const InWord = styled(Grid)(({ theme }) => ({
+    backgroundColor: '#fff62b',
+    padding: theme.spacing(2),
+    width: "50px",
+    height: "50px",
 }));
 export default function WordGrid(props) {
     const word = props.word;
@@ -31,19 +37,19 @@ export default function WordGrid(props) {
 
     let WordResultView = result.split("").map(function(char, index) {
         if (char === "*"){
-            return ( <Grid xs={1}> <InPlace> {word[index]} </InPlace> </Grid> )
+            return ( <Grid > <InPlace > {word[index]} </InPlace> </Grid> )
         }
         if (char === "#"){
-            return ( <Grid xs={1}> <InWord> {word[index]} </InWord> </Grid> )
+            return ( <Grid > <InWord> {word[index]} </InWord> </Grid> )
         }
         if (char === "-"){
-            return ( <Grid xs={1}> <NotInWord> {word[index]} </NotInWord> </Grid> )
+            return ( <Grid > <NotInWord> {word[index]} </NotInWord> </Grid> )
         }
         else return <></>
     })
 
     return (
-        <Grid container justifyContent="center" spacing={3}>
+        <Grid container direction={"row"} justifyContent="center" spacing={0.9}>
             {WordResultView}
         </Grid>
     );

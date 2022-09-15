@@ -1,0 +1,48 @@
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+
+
+}
+.play-button {
+    background-color: white;
+    color: black;
+    border: 2px solid #E85F3FFF;
+}
+
+.play-button:hover {
+    background-color: #E85F3FFF;
+    color: white;
+}
+.update-button {
+    background-color: white;
+    color: black;
+    border: 2px solid #DDEC7CFF;
+    margin: 7px;
+}
+
+.update-button:hover {
+    background-color: #DDEC7CFF;
+    color: white;
+}
+
+.guess-button {
+    background-color: white;
+    color: black;
+    border: 3px solid #70F161;
+    margin: 10px;
+
+}
+
+.guess-button:hover {
+    background-color: #70F161;
+    color: white;
+}
