@@ -4,7 +4,6 @@ import {useParams} from "react-router-dom";
 import StartTheGame from '../servises/GetNewGameProp';
 import WordGrid from './ResultsView'
 import PinInput from 'react-pin-input';
-import Button from "@mui/material/Button";
 import "../css/Buttons.css";
 
 
@@ -79,7 +78,7 @@ export default function Game() {
                     style={{margin: "5px"}}
                     inputStyle={{borderColor: '#037748'}}
                     focus={true}
-                    inputFocusStyle={{borderColor: '#fff76f'}}
+                    inputFocusStyle={{borderColor: '#bda443'}}
                     ref={(n) => inputRef=n}
                     // onComplete={(value, index) => {}}
                     autoSelect={true}
@@ -101,7 +100,6 @@ export default function Game() {
                     success ?
                         <h2>יותר מזל משכל...</h2> : <h2>חבל, נגמרו לך הניחושים.</h2>
             }
-
         </div>
     );
 }
