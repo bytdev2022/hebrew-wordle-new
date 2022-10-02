@@ -82,7 +82,7 @@ export default function NewWordInput() {
                 alert &&
                 <Alert align="center" severity='success'>הקישור הועתק!</Alert>
             }
-            <span className="header_font" >ברוכים הבאים למשחק וורדל</span>
+            <span className="header_font" >וורדל בעברית</span>
             <br/>
             {
                 isLoading?
