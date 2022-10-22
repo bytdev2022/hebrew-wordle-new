@@ -1,8 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('render app', () => {
   render(<App />);
-  const linkElement = screen.getByText(/רחב/i);
+});
+
+test('Check if text exist', () => {
+  render(<App />);
+  const linkElement = screen.getByLabelText('נא הכנס את המילה שלך...');
   expect(linkElement).toBeInTheDocument();
 });
