@@ -26,6 +26,14 @@ export default function NewWordInput() {
 
   let navigate = useNavigate();
 
+  function isValid(word) {
+    var format = /[!@#$%^&*() _+\-=\[\]{};':"\\|,.<>\/?]+/;
+    if(word !== "" && !format.test(word)){
+      return true;
+    }
+    return false;
+  }
+
   function changeWord(e) {
     setWord(e.target.value);
   }
@@ -103,7 +111,7 @@ export default function NewWordInput() {
             sx={{ padding: 1, margin: 2 }}
             variant="contained"
             onClick={sendWord}
-            disabled={!word}
+            disabled={!isValid(word)}
           >
             בחר
           </Button>
