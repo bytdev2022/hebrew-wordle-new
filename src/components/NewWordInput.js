@@ -96,6 +96,7 @@ export default function NewWordInput() {
       ) : (
         <div>
           <TextField
+
             style={{ direction: "rtl" }}
             id="word_input"
             label={"נא הכנס את המילה שלך..."}
