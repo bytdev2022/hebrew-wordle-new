@@ -12,6 +12,6 @@ test('after insert text submit button is enabled', async () => {
   render(<App />);
   const chooseButton = screen.getByRole("button", { name: /בחר/i });
   const inputField = screen.getByRole("textbox", { id: /word_input/i })
-  await userEvent.type(inputField, "test");
+  await userEvent.type(inputField, "אבא");
   expect(chooseButton).not.toBeDisabled();
 })
