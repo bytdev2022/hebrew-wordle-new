@@ -11,6 +11,7 @@ import Dialog from "@mui/material/Dialog";
 // import choosePlay from './CopyUrlOrStartGame'
 import Slide from '@mui/material/Slide';
 import Alert from '@mui/material/Alert';
+import "../App.css";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;

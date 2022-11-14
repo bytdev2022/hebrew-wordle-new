@@ -1,42 +1,30 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import "../css/ResultStyle.css";
 import Grid from '@mui/material/Unstable_Grid2';
 
-const InPlace = styled(Grid)(({ theme }) => ({
-    backgroundColor: 'Chartreuse',
-    padding: theme.spacing(2),
-    width: "50px",
-    height: "50px",
+const Square = (e, color) => {
+    return (
+        <p style={{background: color}}>
+            <span>{e}</span>
+        </p>
+    )
+}
 
-}));
-
-const NotInWord = styled(Grid)(({ theme }) => ({
-    backgroundColor: '#727372',
-    padding: theme.spacing(2),
-    width: "50px",
-    height: "50px",
-}));
-const InWord = styled(Grid)(({ theme }) => ({
-    backgroundColor: '#fff62b',
-    padding: theme.spacing(2),
-    width: "50px",
-    height: "50px",
-}));
 export default function WordGrid(props) {
     const word = props.word;
     const result = props.result;
 
-    let WordResultView = result.split("").map(function(char, index) {
-        if (char === "*"){
-            return ( <Grid > <InPlace > {word[index]} </InPlace> </Grid> )
+    let WordResultView = [];
+    result.split("").forEach((sign, i) => {
+        if (sign === "*") {
+            WordResultView.push(Square(word[i], "Chartreuse"))
         }
-        if (char === "#"){
-            return ( <Grid > <InWord> {word[index]} </InWord> </Grid> )
+        if (sign === "#") {
+            WordResultView.push(Square(word[i], '#fff62b'))
         }
-        if (char === "-"){
-            return ( <Grid > <NotInWord> {word[index]} </NotInWord> </Grid> )
+        if (sign === "-") {
+            WordResultView.push(Square(word[i], '#9e9f9e'))
         }
-        else return <></>
     })
 
     return (
@@ -45,3 +33,4 @@ export default function WordGrid(props) {
         </Grid>
     );
 }
+

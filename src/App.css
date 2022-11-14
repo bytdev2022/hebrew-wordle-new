@@ -1,8 +1,9 @@
-/*
+
 @import url(https://dl.dropboxusercontent.com/u/15746367/fonts/carmela/style.css);
 @import url(https://fonts.googleapis.com/earlyaccess/alefhebrew.css);
 @import url(https://fonts.googleapis.com/earlyaccess/opensanshebrewcondensed.css);
-*/
+
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Bona+Nova&family=Tinos:wght@400;700&display=swap');
 
 
 body {
@@ -10,6 +11,7 @@ body {
   font-family: "Alef Hebrew", sans-serif;
   margin: 20px 25% 20px 0;
   width: 50%;
+  background: #a9ffc0;
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
@@ -17,13 +19,14 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0;
 }
 h1 {
-  font-size: 4em;
-  margin: 0;
+  font-size: 3em;
+  margin: 10px;
   color: #7F82CB;
 }
 
 .header_font{
-  font-family: 'Rubik Burned', cursive;
+  font-family: 'Amatic SC', cursive;
+  font-weight: bold;
   font-size: 4em;
 
 }
@@ -44,11 +47,10 @@ blockquote {
   font-size: 2em;
   font-family: 'Open Sans Hebrew Condensed', serif;
   width: 45%;
-  margin: 0;
   color: #777;
   padding: 0;
   float: right;
-  margin-right: -47.5%;
+  margin: 0 -47.5% 0 0;
   position: relative;
 }
 .App {
@@ -144,6 +146,11 @@ blockquote {
 }
 .App-link1 {
   color: #6dff95;
+}
+
+@media (max-width: 500px) {
+
+
 }
 
 @keyframes App-logo-spin {

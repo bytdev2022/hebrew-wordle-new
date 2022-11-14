@@ -3,8 +3,9 @@ import sendGuess from '../servises/SendGuess';
 import {useParams} from "react-router-dom";
 import StartTheGame from '../servises/GetNewGameProp';
 import WordGrid from './ResultsView'
-import PinInput from 'react-pin-input';
-import "../css/Buttons.css";
+import PinInput from "react-pin-input";
+
+import "../css/GameStyle.css";
 
 
 export default function Game() {
@@ -53,36 +54,39 @@ export default function Game() {
     }
 
     return (
-        <div>
+        <div id={"all-view"}>
             {
                 isLoading ?
-                    <div>
+                    <div id={"opening1"}>
                         <h3>המתן לטעינת המשחק</h3>
                         <h4>(השרת חינמי...)</h4>
+                        <br/><br/>
+                        <h4>רענן במידה וטרם הוצג תוכן</h4>
                         <div className="loader">Loading...</div>
                     </div>
                     :
-                    <div>
+                    <div id={"opening2"}>
                         <h2 style={{margin: "10px"}}> נחשו מהי המילה: </h2>
+
                         <PinInput
                             length={parseInt(numLetters)}
                             onChange={changeWord}
-                            onKeyDown={sendIfEnter}
-                            type="string"
-                            inputMode="string"
+                            onComplete={(value, index) => {console.log(word[index-1])}}
+                            type={"custom"}
                             style={{margin: "5px"}}
-                            inputStyle={{borderColor: '#037748'}}
-                            focus={true}
+                            inputStyle={{borderColor: '#037748', width: "30px", height: "30px", margin: "3px"}}
+                            focus={false}
                             inputFocusStyle={{borderColor: '#bda443'}}
                             ref={(n) => inputRef = n}
                             autoSelect={true}
-                            regexCriteria={/^[א-ת]*$/}/>
+                            regexCriteria={/^[א-ת]*$/}
+                        />
                         <button className={"button guess-button"} disabled={word.length < numLetters}
                                 onClick={sendWord}>שלח
                         </button>
                     </div>
             }
-            <div style={{margin: "5px"}}>
+            <div id={"results"} style={{margin: "5px"}}>
                 {AllResultsView}
             </div>
 
