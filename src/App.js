@@ -7,17 +7,16 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import React, {useState} from "react";
-import {Helmet} from 'react-helmet';
+import React from "react";
 
 function App() {
 
   return (
       <div className="App" style={{ direction: "rtl", margin: "10px"}}>
 
-        <Helmet>
+{/*        <Helmet>
           <style>{'body { background-color: #6dff95; }'}</style>
-        </Helmet>
+        </Helmet>*/}
         <Router>
           <Routes>
             <Route path="/game/:gameID" element={<Game />} />
