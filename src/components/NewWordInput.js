@@ -5,8 +5,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import sendNewWord from "../servises/SendNewWord";
 // import choosePlay from './CopyUrlOrStartGame'
 import Alert from "@mui/material/Alert";
@@ -27,15 +27,15 @@ export default function NewWordInput() {
   let navigate = useNavigate();
 
   function isValid(word) {
-    var format = /[!@#$%^&*() _+\-=\[\]{};':"\\|,.<>\/?]+/;
-    if(word !== "" && !format.test(word)){
-      return true;
-    }
-    return false;
+    let format = /^[א-ת]*$/;
+    return (word !== "" && format.test(word));
   }
 
   function changeWord(e) {
-    setWord(e.target.value);
+    let format = /^[א-ת]*$/;
+    if (format.test(e.target.value)){
+      setWord(e.target.value);
+    }
   }
 
   function sendIfEnter(e) {
